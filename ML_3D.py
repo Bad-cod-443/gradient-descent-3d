@@ -1,9 +1,7 @@
 import numpy as np
 import plotly.graph_objects as go
 
-# ==========================================
 # 1. МАТЕМАТИКА: Функция и её градиент
-# ==========================================
 def f(x, y):
     # Сама 3D поверхность (холмы и впадины)
     return x**2 + y**2 + 5 * np.sin(x) + 5 * np.cos(y)
@@ -15,7 +13,6 @@ def grad_f(x, y):
     return dx, dy
 
 # 2. ПОДГОТОВКА ЛАНДШАФТА (СЕТКА)
-
 x_range = np.linspace(-5, 5, 100)
 y_range = np.linspace(-5, 5, 100)
 X, Y = np.meshgrid(x_range, y_range)
@@ -26,14 +23,12 @@ fig = go.Figure(data=[go.Surface(z=Z, x=X, y=Y, colorscale='Viridis', opacity=0.
 
 
 # 3. БАЗОВЫЕ НАСТРОЙКИ (Гиперпараметры)
-
 learning_rate = 0.05
 epochs = 50
 start_x, start_y = 4.0, 4.0 # Точка старта для всех шариков
 
 
 # 4. ГОНЩИК №1: ОБЫЧНЫЙ ГРАДИЕНТНЫЙ СПУСК (Красный)
-
 cur_x_gd, cur_y_gd = start_x, start_y
 path_x_gd, path_y_gd, path_z_gd = [cur_x_gd], [cur_y_gd], [f(cur_x_gd, cur_y_gd)]
 
@@ -54,9 +49,7 @@ fig.add_trace(go.Scatter3d(
     name='Vanilla GD'
 ))
 
-# ==========================================
 # 5. ГОНЩИК №2: MOMENTUM (Синий)
-# ==========================================
 cur_x_mom, cur_y_mom = start_x, start_y
 path_x_mom, path_y_mom, path_z_mom = [cur_x_mom], [cur_y_mom], [f(cur_x_mom, cur_y_mom)]
 
@@ -85,7 +78,6 @@ fig.add_trace(go.Scatter3d(
 
 
 # 6. ГОНЩИК №3: ADAM (Зеленый)
-
 cur_x_adam, cur_y_adam = start_x, start_y
 path_x_adam, path_y_adam, path_z_adam = [cur_x_adam], [cur_y_adam], [f(cur_x_adam, cur_y_adam)]
 
@@ -126,7 +118,6 @@ fig.add_trace(go.Scatter3d(
 ))
 
 # 7. ФИНАЛЬНЫЕ НАСТРОЙКИ ГРАФИКА И ВЫВОД
-
 fig.update_layout(
     title='Гонка оптимизаторов: Vanilla GD vs Momentum vs Adam',
     width=1000,
